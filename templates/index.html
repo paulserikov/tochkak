@@ -1,0 +1,76 @@
+{% load static %}
+<html>
+
+<head>
+    <title>Newsfeed for tochkak</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="jumbotron">
+                <h1>Демо лента новостей на Django</h1>
+                <p>Необходимо реализовать ленту новостей, каждая новость принадлежит какой-нибудь категории (Политика, Бизнес, Спорт и прочее), 
+                у новости есть название, короткий текст (анонс), полный текст новости, дата публикации, изображение, а также теги. 
+                Должна быть возможность получить список новостей по категории и по выбранному тегу. 
+                В списке новостей показывается изображение, название новости, дата и анонс. 
+                При просмотре новости показываются все поля. 
+                Для создания новостей достаточно сделать простой админ с формой.</p>
+            
+               <p>
+               Требования к коду:<br>
+                — Язык программирования любой на выбор PHP/Python/Perl/Ruby.<br>
+                — СУБД – MySQL<br>
+                — Базовая верстка и JavaScript при необходимости<br>
+                — Применение библиотеки Bootstrap для построения интерфейсов (будет большим плюсом, но необязательно)<br>
+                — Отформатирован<br>
+                — Легко читаем<br>
+                </p>
+
+                <p>Срок выполнения – 7 дней.</p>
+            </div>
+         
+            <div class="col-md-10">
+            
+            <div class="alert alert-success">
+                Протестировано на Django 1.5.4, Python 2.7.5.<br> 
+                Запуск:<br> 
+                1) cd project_path<br>
+                2) python manage.py syncdb<br>
+                3) python manage.py runserver<br>
+                В проекте использован Bootstrap v.3.1.0<br>
+                Суперпользователь админки: test, пароль test.
+            </div>
+
+            <h1>Лента новостей</h1>
+            
+         {% if latest_news_list %}
+         {% for news in latest_news_list %}
+            <div class="media">
+                <a class="pull-left" href="#">
+                <img class="media-object img-circle" src="{{ news.img.url }}" alt="...">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading"><a href="/news/{{news.id}}">{{ news.name }}</a><span class="label label-info">New</span></h4>
+                    <span><b> {{ news.pub_date }}</span></b><br>
+                    <span> {{ news.anounce }}</span>
+                </div>
+            </div>
+        {% endfor %}
+        {% else %}
+            <p>No news are available. Try to create one via admin panel</p>
+        {% endif %}
+        </div>
+        
+        <div class="col-md-2">
+            <button type="button" class="btn btn-default" onclick="location.href='admin/';">Добавить новость</button>
+        </div>
+        
+        
+    </div>
+    </div>
+<body>
+</html>

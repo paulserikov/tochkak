@@ -1,0 +1,38 @@
+{% load static %}
+<html>
+
+<head>
+    <title>Newsfeed for tochkak</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <h1>Все новости с тегом:</h1>
+                {% if filtered_news_list %}
+                {% for news in filtered_news_list %}
+                    <div class="media">
+                        <a class="pull-left" href="#">
+                        <img class="media-object img-circle" src="{{ news.img.url }}" alt="...">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><a href="/news/{{news.id}}">{{ news.name }}</a><span class="label label-info">New</span></h4>
+                            <span><b> {{ news.pub_date }}</span></b><br>
+                            <span> {{ news.anounce }}</span>
+                        </div>
+                    </div>
+        {% endfor %}
+        {% else %}
+            <p>No news are available. Try to create one via admin panel</p>
+        {% endif %}
+            </div>
+        </div>      
+    </div>
+    
+<body>
+</html>

@@ -1,0 +1,37 @@
+{% load static %}
+{% load tagging_tags %}
+
+<html>
+
+<head>
+    <title>Newsfeed for tochkak</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+            
+            <h1>Полный текст новости</h1>
+            
+                <h4>{{ news.name }}</h4>
+                <div><b>{{ news.pub_date }}</b></div>
+                <div>Категория: <a href="/news/cat/{{ news.cat.id }}">{{ news.cat }}</a></div>
+                <img class="img-circle" src="{{ news.img.url }}">
+                <div>Анонс: {{ news.anounce }}</div>
+                <div>Полный текст: {{ news.fulltext }}</div>
+                <div>Теги: 
+                    {% for tag in news.get_tags %}
+                        <a href="/news/tag/{{tag.name}}" alt="{{tag}}" title="{{tag}}">{{tag}}</a>
+                    {%endfor%}       
+                </div>
+            </div>
+        </div>      
+    </div>
+    
+<body>
+</html>
